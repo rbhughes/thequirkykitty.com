@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/nav";
 
 import { unstable_ViewTransition as ViewTransition } from "react";
+import { Footer } from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +29,16 @@ export default function RootLayout({
 }>) {
   return (
     <ViewTransition>
-      <html lang="en">
+      <html lang="en" className="h-full">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gray-100`}
         >
           <Navbar />
-          {children}
+
+          <main className="flex-grow w-[95vw] mx-auto bg-white">
+            {children}
+          </main>
+          <Footer />
         </body>
       </html>
     </ViewTransition>

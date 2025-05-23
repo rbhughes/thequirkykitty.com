@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone-input";
+
+import { Textarea } from "@/components/ui/textarea";
 import {
   MultiSelector,
   MultiSelectorContent,
@@ -33,6 +35,8 @@ const formSchema = z.object({
   last_name: z.string().min(1),
   email: z.string(),
   phone: z.string(),
+  address: z.string(),
+  pets: z.string(),
   services: z.array(z.string()).nonempty("Please at least one item"),
   departure: z.unknown(),
   return: z.unknown(),
@@ -43,9 +47,16 @@ export default function ContactForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      services: ["React"],
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone: "",
+      address: "",
+      pets: "",
+      services: ["Daily visit AM"],
       departure: new Date(),
       return: new Date(),
+      message: "",
     },
   });
 
@@ -78,9 +89,9 @@ export default function ContactForm() {
               <FormControl>
                 <Input placeholder="shadcn" type="text" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -93,11 +104,11 @@ export default function ContactForm() {
             <FormItem>
               <FormLabel>Last Name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" type="" {...field} />
+                <Input placeholder="shadcn" type="text" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -112,9 +123,9 @@ export default function ContactForm() {
               <FormControl>
                 <Input placeholder="shadcn" type="email" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -127,13 +138,43 @@ export default function ContactForm() {
             <FormItem className="flex flex-col items-start">
               <FormLabel>Phone</FormLabel>
               <FormControl className="w-full">
-                <PhoneInput
-                  placeholder="Placeholder"
-                  {...field}
-                  defaultCountry="TR"
-                />
+                <PhoneInput placeholder="" {...field} defaultCountry="US" />
               </FormControl>
-              <FormDescription>Enter your phone number.</FormDescription>
+              {/* <FormDescription>Enter your phone number.</FormDescription> */}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Address</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" type="text" {...field} />
+              </FormControl>
+              {/* <FormDescription>
+                This is your public display name.
+              </FormDescription> */}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="pets"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Pet name(s)</FormLabel>
+              <FormControl>
+                <Input placeholder="ziggy" type="text" {...field} />
+              </FormControl>
+              {/* <FormDescription>
+                This is your public display name.
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -153,22 +194,34 @@ export default function ContactForm() {
                   className="max-w-xs"
                 >
                   <MultiSelectorTrigger>
-                    <MultiSelectorInput placeholder="Select languages" />
+                    <MultiSelectorInput placeholder="Select options" />
                   </MultiSelectorTrigger>
                   <MultiSelectorContent>
                     <MultiSelectorList>
-                      <MultiSelectorItem value={"React"}>
-                        React
+                      <MultiSelectorItem value={"Daily visit AM"}>
+                        Daily visit AM
                       </MultiSelectorItem>
-                      <MultiSelectorItem value={"Vue"}>Vue</MultiSelectorItem>
-                      <MultiSelectorItem value={"Svelte"}>
-                        Svelte
+
+                      <MultiSelectorItem value={"Daily visit PM"}>
+                        Daily visit PM
+                      </MultiSelectorItem>
+
+                      <MultiSelectorItem value={"Overnight visit"}>
+                        Overnight
+                      </MultiSelectorItem>
+
+                      <MultiSelectorItem value={"Behavioral consultation"}>
+                        Behavioral consultation
+                      </MultiSelectorItem>
+
+                      <MultiSelectorItem value={"Other (see below)"}>
+                        Other
                       </MultiSelectorItem>
                     </MultiSelectorList>
                   </MultiSelectorContent>
                 </MultiSelector>
               </FormControl>
-              <FormDescription>Select multiple options.</FormDescription>
+              <FormDescription>(select all that apply)</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -188,7 +241,9 @@ export default function ContactForm() {
                   locale={enUS}
                 />
               </FormControl>
-              <FormDescription>Please select the full time</FormDescription>
+              <FormDescription>
+                Use selection form or type text like "next Friday at noon"
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -208,7 +263,7 @@ export default function ContactForm() {
                   locale={enUS}
                 />
               </FormControl>
-              <FormDescription>Please select the full time</FormDescription>
+              <FormDescription>Approximate service end</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -221,10 +276,11 @@ export default function ContactForm() {
             <FormItem>
               <FormLabel>Message</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" type="text" {...field} />
+                <Textarea placeholder="tell us about your kitty!" {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                Include any additional information, behavioral issues,
+                medication, etc.
               </FormDescription>
               <FormMessage />
             </FormItem>
