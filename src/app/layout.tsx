@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/nav";
+import { Toaster } from "@/components/ui/sonner";
 
 import { unstable_ViewTransition as ViewTransition } from "react";
 import { Footer } from "@/components/footer";
@@ -37,6 +38,7 @@ export default function RootLayout({
 
           <main className="flex-grow w-[95vw] mx-auto bg-white">
             {children}
+            <Toaster duration={10000} />
           </main>
           <Footer />
         </body>
