@@ -90,8 +90,7 @@ export default function GalleryPage() {
   }
 
   return (
-    <div>
-      <h1>Gallery</h1>
+    <div className="my-10">
       <PhotoGallery photos={photos} />
     </div>
   );
