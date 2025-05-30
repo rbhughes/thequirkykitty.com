@@ -1,93 +1,123 @@
-// // components/Navbar.tsx
-// import Link from "next/link";
+"use client";
 
-// export default function Navbar() {
-//   return (
-//     <nav style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
-//       <Link href="/">Home</Link>
-//       <Link href="/about">About</Link>
-//       <Link href="/services">Services</Link>
-//       <Link href="/contact">Contact</Link>
-//       <Link href="/reviews">Reviews</Link>
-//       <Link href="/gallery">Gallery</Link>
-//     </nav>
-//   );
-// }
-
-// components/Navbar.tsx
-
+import { useState } from "react";
 import Link from "next/link";
-
-// export default function Navbar() {
-//   return (
-//     <nav className="fixed top-0 left-0 w-full bg-white shadow z-50">
-//       <div className="container mx-auto px-4">
-//         <ul className="flex justify-center items-center space-x-8 py-4">
-//           <li>
-//             <Link
-//               href="/"
-//               className="text-gray-800 hover:text-blue-600 font-medium"
-//             >
-//               Home
-//             </Link>
-//           </li>
-//           <li>
-//             <Link
-//               href="/about"
-//               className="text-gray-800 hover:text-blue-600 font-medium"
-//             >
-//               About
-//             </Link>
-//           </li>
-//           <li>
-//             <Link
-//               href="/services"
-//               className="text-gray-800 hover:text-blue-600 font-medium"
-//             >
-//               Services
-//             </Link>
-//           </li>
-//           <li>
-//             <Link
-//               href="/contact"
-//               className="text-gray-800 hover:text-blue-600 font-medium"
-//             >
-//               Contact
-//             </Link>
-//           </li>
-//           <li>
-//             <Link
-//               href="/reviews"
-//               className="text-gray-800 hover:text-blue-600 font-medium"
-//             >
-//               Reviews
-//             </Link>
-//           </li>
-//           <li>
-//             <Link
-//               href="/gallery"
-//               className="text-gray-800 hover:text-blue-600 font-medium"
-//             >
-//               Gallery
-//             </Link>
-//           </li>
-//         </ul>
-//       </div>
-//     </nav>
-//   );
-// }
+import Image from "next/image";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="h-16 flex items-center bg-gray-400">
-      <div className="mx-auto flex space-x-8">
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-        <Link href="/services">Services</Link>
-        <Link href="/contact">Contact</Link>
-        <Link href="/reviews">Reviews</Link>
-        <Link href="/gallery">Gallery</Link>
+    <nav className="tqk-nav-gradient">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Brand / Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/">
+              <Image
+                src="/black_kitty_head.png"
+                alt="The Quirky Kitty"
+                width={80}
+                height={100}
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-8 font-extrabold text-black">
+            {/* <Link href="/" className="text-white hover:text-gray-200">
+              Home
+            </Link> */}
+            <Link href="/about" className="hover:text-cyan-700">
+              About
+            </Link>
+            <Link href="/services" className="hover:text-cyan-700">
+              Services
+            </Link>
+            <Link href="/contact" className="hover:text-cyan-700">
+              Contact
+            </Link>
+            {/* <Link href="/reviews" className="hover:text-cyan-700">
+              Reviews
+            </Link> */}
+            <Link href="/gallery" className="hover:text-cyan-700">
+              Gallery
+            </Link>
+          </div>
+
+          {/* Mobile Hamburger Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              type="button"
+              aria-controls="mobile-menu"
+              aria-expanded={isOpen}
+              className="inline-flex items-center justify-center p-2 rounded-md bg-cyan-700 text-white hover:bg-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <span className="sr-only">Open main menu</span>
+              {!isOpen ? (
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div id="mobile-menu" className="md:hidden bg-stone-400 text-black">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <Link href="/" className="tqk-burger-link">
+              Home
+            </Link>
+            <Link href="/about" className="tqk-burger-link">
+              About
+            </Link>
+            <Link href="/services" className="tqk-burger-link">
+              Services
+            </Link>
+            <Link href="/contact" className="tqk-burger-link">
+              Contact
+            </Link>
+            {/* <Link href="/reviews" className="tqk-burger-link">
+              Reviews
+            </Link> */}
+            <Link href="/gallery" className="tqk-burger-link">
+              Gallery
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

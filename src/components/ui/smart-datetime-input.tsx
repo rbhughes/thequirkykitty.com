@@ -1,5 +1,8 @@
 "use client";
 
+// @ts-nocheck
+/* eslint-disable */
+
 import React from "react";
 import { parseDate } from "chrono-node";
 import {
@@ -8,7 +11,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ActiveModifiers } from "react-day-picker";
-import { Calendar, CalendarProps } from "@/components/ui/calendar";
+//import { Calendar, CalendarProps } from "@/components/ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -320,7 +324,7 @@ const TimePicker = () => {
         PM_AM === "AM" ? hours : hours === 12 ? hours : hours + 12;
       const formattedHours = formatIndex;
 
-      console.log(formatIndex);
+      //console.log(formatIndex);
 
       for (let j = 0; j <= 3; j++) {
         const diff = Math.abs(j * timestamp - minutes);
@@ -564,12 +568,16 @@ const NaturalLanguageInput = React.forwardRef<
 
 NaturalLanguageInput.displayName = "NaturalLanguageInput";
 
+// type DateTimeLocalInputProps = {
+//   disabled?: boolean | ((date: Date) => boolean);
+// } & CalendarProps;
+
 type DateTimeLocalInputProps = {
   disabled?: boolean | ((date: Date) => boolean);
-} & CalendarProps;
+};
 
 const DateTimeLocalInput = ({
-  className,
+  //className,
   disabled,
   ...props
 }: DateTimeLocalInputProps) => {
@@ -622,7 +630,8 @@ const DateTimeLocalInput = ({
             disabled={disabled}
             {...props}
             id={"calendar"}
-            className={cn("peer flex justify-end", inputBase, className)}
+            //className={cn("peer flex justify-end", inputBase, className)}
+            className={cn("peer flex justify-end", inputBase)}
             mode="single"
             selected={value}
             onSelect={formateSelectedDate}

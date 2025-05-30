@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans, Noto_Serif } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/nav";
@@ -8,13 +8,13 @@ import { Toaster } from "@/components/ui/sonner";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import { Footer } from "@/components/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSerif = Noto_Serif({
+  variable: "--font-noto-serif",
   subsets: ["latin"],
 });
 
@@ -29,20 +29,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransition>
-      <html lang="en" className="h-full">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gray-100`}
-        >
+    <html
+      lang="en"
+      className={`h-full ${notoSerif.variable} ${notoSans.variable}`}
+    >
+      <body className={`flex flex-col min-h-full bg-tqk-beige antialiased`}>
+        <ViewTransition>
           <Navbar />
 
-          <main className="flex-grow w-[95vw] mx-auto bg-white">
+          <main className="flex flex-col h-full flex-grow w-[94vw] mx-auto bg-quirky-beige p-4">
             {children}
             <Toaster duration={10000} />
           </main>
           <Footer />
-        </body>
-      </html>
-    </ViewTransition>
+        </ViewTransition>
+      </body>
+    </html>
   );
 }

@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
+  images: {
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.mapbox.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -4,8 +4,9 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { cn } from "@/lib/utils";
+//import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   Form,
   FormControl,
@@ -37,15 +38,15 @@ import {
 } from "@/components/ui/select";
 
 import { SmartDatetimeInput } from "@/components/ui/smart-datetime-input";
-import { enUS } from "date-fns/locale";
+//import { enUS } from "date-fns/locale";
 
 const formSchema = z.object({
   intro: z.string(),
-  first_name: z.string().min(1),
-  last_name: z.string().min(1),
-  email: z.string().min(1),
-  phone: z.string().min(1),
-  address: z.string(),
+  first_name: z.string().min(1, { message: "First name is required" }),
+  last_name: z.string().min(1, { message: "Last name is required" }),
+  email: z.string().min(3, { message: "Must enter a valid email" }),
+  phone: z.string().min(7, { message: "Must enter a valid phone" }),
+  address: z.string().min(1, { message: "Must enter a valid address" }),
   pets: z.string(),
   services: z.array(z.string()).nonempty("Please at least one item"),
   visit_start: z.unknown(),
@@ -55,6 +56,9 @@ const formSchema = z.object({
 
 const CONTACT_URL =
   "https://p8z9dmiqy7.execute-api.us-east-1.amazonaws.com/prod/contact";
+
+const MAP_URL =
+  "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/-87.6307,41.8978,13,0/400x600?access_token=pk.eyJ1IjoibG9naWNhbGNhdCIsImEiOiJoVXNtZlRvIn0.TSaK5rJ11pzkNL7L4wnjfQ";
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -123,16 +127,16 @@ export default function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-10 p-4 max-w-[70vw] space-y-6 mx-auto border-2"
+        className="mt-10 p-10 max-w-[70vw] space-y-6 mx-auto border-2 bg-stone-100 rounded-md"
       >
         <FormField
           control={form.control}
           name="intro"
           render={({ field }) => (
-            <FormItem className="w-1/2 pr-2 mb-12">
+            <FormItem className="w-full md:w-[50%] pr-2 mb-12">
               <FormLabel>How did you hear about The Quirky Kitty?</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl className="w-full">
+                <FormControl className="w-full bg-white">
                   <SelectTrigger>
                     <SelectValue placeholder="Veterinarian" />
                   </SelectTrigger>
@@ -153,7 +157,7 @@ export default function ContactForm() {
           )}
         />
 
-        <div className="flex gap-4 w-full">
+        <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <FormField
               control={form.control}
@@ -161,7 +165,7 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>First Name</FormLabel>
-                  <FormControl>
+                  <FormControl className="bg-white">
                     <Input placeholder="First name" type="text" {...field} />
                   </FormControl>
                   {/* <FormDescription>
@@ -180,7 +184,7 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
-                  <FormControl>
+                  <FormControl className="bg-white">
                     <Input placeholder="Last name" type="text" {...field} />
                   </FormControl>
                   {/* <FormDescription>
@@ -193,7 +197,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <div className="flex gap-4 w-full">
+        <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <FormField
               control={form.control}
@@ -201,7 +205,7 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
-                  <FormControl>
+                  <FormControl className="bg-white">
                     <Input placeholder="Email" type="email" {...field} />
                   </FormControl>
                   {/* <FormDescription>
@@ -220,7 +224,7 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem className="flex flex-col items-start">
                   <FormLabel>Phone</FormLabel>
-                  <FormControl className="w-full">
+                  <FormControl className="w-full bg-white">
                     <PhoneInput
                       placeholder="(xxx) xxx-xxxx"
                       {...field}
@@ -241,7 +245,7 @@ export default function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Address</FormLabel>
-              <FormControl>
+              <FormControl className="bg-white">
                 <Input
                   placeholder="Chicago street address"
                   type="text"
@@ -256,114 +260,71 @@ export default function ContactForm() {
           )}
         />
 
-        <div className="border-2 rounded-md m-8 p-6 space-y-8">
-          <FormField
-            control={form.control}
-            name="services"
-            render={({ field }) => (
-              // <FormItem className="px-4 py-6 ">
-              <FormItem>
-                <FormLabel>Services requested</FormLabel>
-                <FormControl className="mb-[-9] bg-white ">
-                  <MultiSelector
-                    values={field.value}
-                    onValuesChange={field.onChange}
-                    loop
-                    className="outline outline-gray-200 rounded-sm"
-                  >
-                    <MultiSelectorTrigger>
-                      <MultiSelectorInput placeholder="(select options)" />
-                    </MultiSelectorTrigger>
-                    <MultiSelectorContent>
-                      <MultiSelectorList>
-                        <MultiSelectorItem value={"Once-daily visit"}>
-                          Once-daily visit
-                        </MultiSelectorItem>
-
-                        <MultiSelectorItem value={"Twice-daily visit"}>
-                          Twice-daily visit
-                        </MultiSelectorItem>
-
-                        <MultiSelectorItem value={"Overnight visit"}>
-                          Overnight visit
-                        </MultiSelectorItem>
-
-                        <MultiSelectorItem value={"Behavioral consultation"}>
-                          Behavioral consultation
-                        </MultiSelectorItem>
-
-                        <MultiSelectorItem value={"Other (see below)"}>
-                          Other
-                        </MultiSelectorItem>
-                      </MultiSelectorList>
-                    </MultiSelectorContent>
-                  </MultiSelector>
-                </FormControl>
-                {/* <FormDescription>(select all that apply)</FormDescription> */}
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="flex gap-4 w-full">
-            <div className="flex-1">
-              <FormField
-                control={form.control}
-                name="visit_start"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Visit start</FormLabel>
-                    <FormControl>
-                      <SmartDatetimeInput
-                        value={field.value}
-                        onValueChange={field.onChange}
-                        placeholder="e.g. Tomorrow morning 9am"
-                        locale={enUS}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      Use selection form or just enter text like "next Friday at
-                      noon"
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="flex-1">
-              <FormField
-                control={form.control}
-                name="visit_end"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Visit end</FormLabel>
-                    <FormControl>
-                      <SmartDatetimeInput
-                        value={field.value}
-                        onValueChange={field.onChange}
-                        placeholder="e.g. Tomorrow morning 9am"
-                        locale={enUS}
-                      />
-                    </FormControl>
-                    {/* <FormDescription>Approximate service end</FormDescription> */}
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+        <div className="flex flex-col md:flex-row gap-10 my-10">
+          <div className="w-full md:w-[30%] md:mx-4 rounded-md border-1">
+            <Image
+              alt="Mapbox static map"
+              src={MAP_URL}
+              width={600}
+              height={600}
+            />
           </div>
-        </div>
+          <div className="w-full md:w-[70%]  space-y-8 my-auto">
+            <FormField
+              control={form.control}
+              name="services"
+              render={({ field }) => (
+                // <FormItem className="px-4 py-6 ">
+                <FormItem>
+                  <FormLabel>Services requested</FormLabel>
+                  <FormControl className="mb-[-9] bg-white ">
+                    <MultiSelector
+                      values={field.value}
+                      onValuesChange={field.onChange}
+                      loop
+                      className="outline outline-gray-200 rounded-sm"
+                    >
+                      <MultiSelectorTrigger>
+                        <MultiSelectorInput placeholder="(select options)" />
+                      </MultiSelectorTrigger>
+                      <MultiSelectorContent>
+                        <MultiSelectorList>
+                          <MultiSelectorItem value={"Once-daily visit"}>
+                            Once-daily visit
+                          </MultiSelectorItem>
 
-        <div className="flex gap-4 w-full">
-          <div className="w-[30%]">
+                          <MultiSelectorItem value={"Twice-daily visit"}>
+                            Twice-daily visit
+                          </MultiSelectorItem>
+
+                          <MultiSelectorItem value={"Overnight visit"}>
+                            Overnight visit
+                          </MultiSelectorItem>
+
+                          <MultiSelectorItem value={"Behavioral consultation"}>
+                            Behavioral consultation
+                          </MultiSelectorItem>
+
+                          <MultiSelectorItem value={"Other (see below)"}>
+                            Other
+                          </MultiSelectorItem>
+                        </MultiSelectorList>
+                      </MultiSelectorContent>
+                    </MultiSelector>
+                  </FormControl>
+                  {/* <FormDescription>(select all that apply)</FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="pets"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Pet name(s)</FormLabel>
-                  <FormControl>
+                  <FormControl className="bg-white">
                     <Input placeholder="Ziggy" type="text" {...field} />
                   </FormControl>
                   {/* <FormDescription>
@@ -373,37 +334,85 @@ export default function ContactForm() {
                 </FormItem>
               )}
             />
-          </div>
 
-          <div className="flex-1">
+            <hr className="border-t-2 border-gray-100 w-1/3 mx-auto mt-12 mb-10" />
+
             <FormField
               control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="tell us about your kitty!"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Include any additional information, behavioral issues,
-                    medication, etc.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
+              name="visit_start"
+              render={({ field }) => {
+                const dateValue = field.value as Date | undefined;
+                return (
+                  <FormItem>
+                    <FormLabel>Visit start</FormLabel>
+                    <FormControl className="bg-white">
+                      <SmartDatetimeInput
+                        {...field}
+                        value={dateValue}
+                        onValueChange={field.onChange}
+                        placeholder="e.g. Tomorrow morning 9am"
+                        //locale={enUS}
+                      />
+                    </FormControl>
+                    {/* <FormDescription>
+                    Click or just enter text like "next monday afternoon"
+                  </FormDescription> */}
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+
+            <FormField
+              control={form.control}
+              name="visit_end"
+              render={({ field }) => {
+                const dateValue = field.value as Date | undefined;
+                return (
+                  <FormItem>
+                    <FormLabel>Visit end</FormLabel>
+                    <FormControl className="bg-white">
+                      <SmartDatetimeInput
+                        value={dateValue}
+                        onValueChange={field.onChange}
+                        placeholder="e.g. Tomorrow morning 9am"
+                        //locale={enUS}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Click or just enter text like &quotnext monday
+                      afternoon&quot
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
             />
           </div>
         </div>
 
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Message</FormLabel>
+              <FormControl className="bg-white">
+                <Textarea placeholder="tell us about your kitty!" {...field} />
+              </FormControl>
+              <FormDescription>
+                Include any additional information, behavioral issues,
+                medication, etc.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button
           disabled={isSubmitting}
-          className=""
           type="submit"
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
+          className="font-bold py-2 px-4 rounded text-white bg-cyan-700 hover:bg-black"
         >
           {isSubmitting ? "Sending..." : "Send"}
         </Button>
