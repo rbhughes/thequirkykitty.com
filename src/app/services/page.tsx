@@ -1,4 +1,8 @@
 "use client";
+import Image from "next/image";
+
+const src = "https://thequirkykitty.com/content/blue_swirl.jpeg";
+
 export default function Services() {
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4">
@@ -9,6 +13,8 @@ export default function Services() {
           This is the left column content. It will stack vertically on mobile
           and display side-by-side on medium screens and larger.
         </p>
+
+        <Image src={src} alt="The Quirky Kitty" width={140} height={100} />
       </div>
 
       {/* Right Column */}
