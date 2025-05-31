@@ -6,10 +6,10 @@ import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 const src = "https://thequirkykitty.com/content/blue_swirl.jpeg";
 
-const testMd = "https://thequirkykitty.com/content/test.md";
+const sittingMd = "https://thequirkykitty.com/content/test.md";
 
 export default function Services() {
-  const { content, error, loading } = useS3Fetch(testMd);
+  const { content, error, loading } = useS3Fetch(sittingMd);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading markdown</div>;
