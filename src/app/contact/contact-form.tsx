@@ -127,7 +127,7 @@ export default function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-10 p-10 max-w-[70vw] space-y-6 mx-auto border-2 bg-stone-100 rounded-md"
+        className="mt-10 p-10 max-w-[70vw] space-y-6 mx-auto border-2 bg-white/40 rounded-xl"
       >
         <FormField
           control={form.control}
@@ -224,8 +224,9 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem className="flex flex-col items-start">
                   <FormLabel>Phone</FormLabel>
-                  <FormControl className="w-full bg-white">
+                  <FormControl className="w-full">
                     <PhoneInput
+                      className="rounded-md bg-white" //phone-input edits!
                       placeholder="(xxx) xxx-xxxx"
                       {...field}
                       defaultCountry="US"

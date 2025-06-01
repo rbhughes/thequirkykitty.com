@@ -186,3 +186,7 @@
 .tqk-burger-link {
     @apply block px-3 py-2 rounded-md text-white hover:bg-cyan-700;
 }
+
+.tqk-card {
+    @apply p-4 bg-white/40;
+}
