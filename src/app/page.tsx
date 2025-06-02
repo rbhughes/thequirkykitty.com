@@ -18,14 +18,6 @@ export default function Home() {
         {/* </Link> */}
       </div>
 
-      {/* <Image
-        src="/tqk_black.png"
-        alt="The Quirky Kitty"
-        width={600}
-        height={200}
-        priority
-        className="w-full max-w-[600px] h-auto"
-      /> */}
       <div className="w-full md:w-10/12">
         <div className="text-2xl md:text-4xl font-semibold text-center font-serif italic px-2 my-10">
           &quot;There are no ordinary cats.&quot; –Colette
@@ -49,7 +41,7 @@ export default function Home() {
                 Your Cat Deserves a Pro
               </CardTitle>
               <div className="text-lg md:text-3xl tracking-wide mt-10">
-                Welcome! I'm{" "}
+                Welcome! I&apos;m{" "}
                 <Link href="/about" className="text-cyan-700">
                   Heidi
                 </Link>
@@ -58,14 +50,14 @@ export default function Home() {
                 <Link href="/services" className="text-cyan-700">
                   services
                 </Link>{" "}
-                to discerning cat guardians in Chicago's <b>Gold Coast</b>,{" "}
+                to discerning cat guardians in Chicago&apos;s <b>Gold Coast</b>,{" "}
                 <b>River North</b>, <b>Old Town</b>, and <b>Streeterville</b>{" "}
                 neighborhoods.{" "}
               </div>
               <div className="text-lg md:text-3xl tracking-wide mt-4">
-                Cats don't bestow their trust on just anyone. You have to earn
-                it. I'm on a mission to do that with every cat I serve (and
-                every cat's human, too!).
+                Cats don&apos;t bestow their trust on just anyone. You have to
+                earn it. I&apos;m on a mission to do that with every cat I serve
+                (and every cat&apos;s human, too!).
               </div>
             </Card>
           </div>
