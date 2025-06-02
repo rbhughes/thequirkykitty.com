@@ -6,8 +6,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
 import Image from "next/image";
 
-import ContactOrBook from "@/components/contact-or-book";
-const src = "https://thequirkykitty.com/content/photos/blue_swirl.jpeg";
+const src = "https://thequirkykitty.com/content/photos/xyla.jpeg";
 
 const s3Summary = "https://thequirkykitty.com/content/services_summary.md";
 const s3Sitting = "https://thequirkykitty.com/content/services_sitting.md";
@@ -43,25 +42,30 @@ export default function Services() {
 
   return (
     <>
-      <Card className="tqk-card my-4">
-        <div className="markdown p-4">
-          <ReactMarkdown>{summaryContent}</ReactMarkdown>
-        </div>
-        <ContactOrBook />
-      </Card>
-
-      <div className="flex flex-col md:flex-row gap-4">
-        <Card className="tqk-card">
-          <CardTitle>Cat Sitting</CardTitle>
-          <CardContent className="flex flex-row gap-4">
-            {/* behavior */}
+      <div className="flex flex-col md:flex-row gap-5 mb-5">
+        <Card className="tqk-card w-full md:w-1/3 md:shrink-0 order-1 md:order-1">
+          <div className="relative w-full  md:h-full aspect-[4/3] md:aspect-auto">
             <Image
               src={src}
-              alt="Blue swirl"
-              width={80}
-              height={80}
-              className="hidden md:block w-1/5 object-cover"
+              alt="Top Shelf"
+              fill
+              className="rounded-lg shadow-xl object-cover"
             />
+          </div>
+        </Card>
+
+        <Card className="tqk-card w-full md:w-2/3 order-2 md:order-2">
+          <CardTitle className="tqk-card-title">Top Shelf Services</CardTitle>
+          <div className="markdown h-48">
+            <ReactMarkdown>{summaryContent}</ReactMarkdown>
+          </div>
+        </Card>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-5">
+        <Card className="tqk-card">
+          <CardTitle className="tqk-card-title">Cat Sitting</CardTitle>
+          <CardContent className="flex flex-row gap-4">
             <div className="markdown p-4">
               <ReactMarkdown>{sittingContent}</ReactMarkdown>
             </div>
@@ -69,16 +73,10 @@ export default function Services() {
         </Card>
 
         <Card className="tqk-card">
-          <CardTitle>Behavioral Consultation</CardTitle>
+          <CardTitle className="tqk-card-title">
+            Behavioral Consultation
+          </CardTitle>
           <CardContent className="flex flex-row gap-4">
-            {/* behavior */}
-            <Image
-              src={src}
-              alt="Blue swirl"
-              width={80}
-              height={80}
-              className="hidden md:block w-1/5 object-cover"
-            />
             <div className="markdown p-4">
               <ReactMarkdown>{behaviorContent}</ReactMarkdown>
             </div>

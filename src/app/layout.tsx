@@ -37,7 +37,7 @@ export default function RootLayout({
         <ViewTransition>
           <Navbar />
 
-          <main className="flex flex-col h-full flex-grow w-[94vw] mx-auto bg-quirky-beige p-4">
+          <main className="flex flex-col h-full flex-grow w-[94vw] mx-auto bg-quirky-beige p-4 mt-12">
             {children}
             <Toaster duration={10000} />
           </main>

@@ -174,12 +174,12 @@
     background: linear-gradient(to bottom, #eadbc3, #f5f5f4, #eadbc3);
 }
 
-.tqk-footer-gradient {
+/* .tqk-footer-gradient {
     background: linear-gradient(to bottom, #eadbc3, #f5f5f4);
-}
+} */
 
 .tqk-bigass-button {
-    @apply bg-cyan-700 hover:bg-black text-white font-bold py-4 px-8 text-xl;
+    @apply bg-cyan-700 hover:bg-black text-white font-bold py-2 px-8 text-xl;
     @apply transition-colors duration-200 rounded-lg;
 }
 
@@ -188,5 +188,9 @@
 }
 
 .tqk-card {
-    @apply p-4 bg-white/40;
+    @apply py-4 px-8 bg-white/40;
+}
+
+.tqk-card-title {
+    @apply font-serif text-4xl pt-2 pl-2;
 }
