@@ -8,7 +8,7 @@ export default function Contact() {
       <button className="tqk-bigass-button">
         <Link href="/contact">Existing Client? Book Service</Link>
       </button>
-      <div className="w-7/12">
+      <div className="md:w-7/12">
         <ContactForm />
       </div>
     </div>

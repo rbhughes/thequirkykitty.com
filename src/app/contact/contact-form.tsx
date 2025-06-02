@@ -127,7 +127,7 @@ export default function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-10 p-10 max-w-[70vw] space-y-6 mx-auto border-2 bg-white/40 rounded-xl"
+        className="mt-10 p-10 md:max-w-[70vw] space-y-6 mx-auto border-2 bg-white/40 rounded-xl"
       >
         <FormField
           control={form.control}
