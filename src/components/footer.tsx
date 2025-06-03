@@ -29,10 +29,18 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-2 order-1">
           <button className="tqk-bigass-button">
-            <Link href="/contact">New Client? Send Inquiry</Link>
+            <Link href="/contact">
+              <span className="md:hidden">Send Inquiry</span>
+              <span className="hidden md:inline">New Client? Send Inquiry</span>
+            </Link>
           </button>
           <button className="tqk-bigass-button">
-            <Link href="/contact">Existing Client? Book Service</Link>
+            <Link href="/contact">
+              <span className="md:hidden">Book Service</span>
+              <span className="hidden md:inline">
+                Existing Client? Book Service
+              </span>
+            </Link>
           </button>
         </div>
 

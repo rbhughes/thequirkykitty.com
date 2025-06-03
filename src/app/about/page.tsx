@@ -49,8 +49,8 @@ export default function About() {
       </div>
 
       <Card className="tqk-card my-5 w-full">
-        <CardContent className="relative flex flex-col md:flex-row justify-center gap-4 md:gap-0 p-4 md:h-48">
-          <div className="relative w-full md:w-1/5 h-24 md:h-full">
+        <CardContent className="relative flex flex-col md:flex-row justify-center gap-10 sm:gap-4 p-4 md:h-48">
+          <div className="relative w-full md:w-1/5 md:h-[50%] sm:h-16 md:self-center ">
             <Image
               src="/uw.png"
               alt="University of Washington"
@@ -58,8 +58,14 @@ export default function About() {
               className="object-contain"
             />
           </div>
-          <div className="relative w-full md:w-1/5 h-20 md:h-[90%] md:self-center">
-            <Image src="/cpr.webp" alt="CPR" fill className="object-contain" />
+          {/* <div className="relative w-full md:w-1/5 h-20 md:h-[90%] md:self-center"> */}
+          <div className="relative w-full md:w-1/5 h-24 md:h-full">
+            <Image
+              src="/pro_pet_hero.png"
+              alt="CPR"
+              fill
+              className="object-contain"
+            />
           </div>
           <div className="relative w-full md:w-1/5 h-24 md:h-full">
             <Image
