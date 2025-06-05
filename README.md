@@ -1,36 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+Welcome to [The Quirky Kitty](https://thequirkykitty.com) website repository!
+</div>
 
-## Getting Started
+![The Quirky Kitty](public/tqk_black.png)
 
-First, run the development server:
+### It's a basic, static site built with [Next.js](https://nextjs.org) and hosted on [S3](https://aws.amazon.com/s3/).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### ...not _entirely_ static thanks to some AWS stuff:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Contact form built with [shadcn](https://ui.shadcn.com/), uses a [lambda](https://aws.amazon.com/lambda/) function to forward emails.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* The gallery displays an arbitrary number of photos loaded from s3
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Text content is actually [markdown](https://www.markdownguide.org/) and dynamically read from S3 via [CloudFront](https://aws.amazon.com/cloudfront/)
