@@ -1,5 +1,5 @@
 <div align="center">
-Welcome to [The Quirky Kitty](https://thequirkykitty.com) website repository!
+[The Quirky Kitty](https://thequirkykitty.com)
 </div>
 
 ![The Quirky Kitty](public/tqk_black.png)
