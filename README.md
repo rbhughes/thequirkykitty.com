@@ -1,5 +1,5 @@
 <div align="center">
-[The Quirky Kitty](https://thequirkykitty.com)
+<a href="https://thequirkykitty.com">The Quirky Kitty</a>
 </div>
 
 ![The Quirky Kitty](public/tqk_black.png)
