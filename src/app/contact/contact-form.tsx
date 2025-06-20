@@ -8,6 +8,14 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -62,6 +70,8 @@ const MAP_URL =
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState<string>("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -80,20 +90,6 @@ export default function ContactForm() {
     },
   });
 
-  // function onSubmit(values: z.infer<typeof formSchema>) {
-  //   try {
-  //     console.log(values);
-  //     toast(
-  //       <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-  //         <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-  //       </pre>,
-  //     );
-  //   } catch (error) {
-  //     console.error("Form submission error", error);
-  //     toast.error("Failed to submit the form. Please try again.");
-  //   }
-  // }
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
@@ -109,12 +105,15 @@ export default function ContactForm() {
         throw new Error("Network response was not ok");
       }
 
-      //toast("Form submitted successfully!");
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>,
-      );
+      // toast(
+      //   <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+      //     <code className="text-white">{JSON.stringify(values, null, 2)}</code>
+      //   </pre>,
+      // );
+
+      setSubmittedEmail(values.email);
+      setDialogOpen(true);
+      form.reset();
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -328,9 +327,6 @@ export default function ContactForm() {
                   <FormControl className="bg-white">
                     <Input placeholder="Ziggy" type="text" {...field} />
                   </FormControl>
-                  {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
@@ -418,6 +414,16 @@ export default function ContactForm() {
           {isSubmitting ? "Sending..." : "Send"}
         </Button>
       </form>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Inquiry Submitted</DialogTitle>
+            <DialogDescription className="text-2xl">
+              {`Successfully submitted your inquiry. We'll respond to ${submittedEmail} soon!`}
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </Form>
   );
 }

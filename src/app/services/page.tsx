@@ -54,7 +54,7 @@ export default function Services() {
 
         <Card className="tqk-card w-full md:w-2/3 order-2 md:order-2">
           <CardTitle className="tqk-card-title">Top-Shelf Service</CardTitle>
-          <div className="markdown h-48">
+          <div className="markdown overflow-y-auto max-h-96">
             <ReactMarkdown>{summaryContent}</ReactMarkdown>
           </div>
         </Card>

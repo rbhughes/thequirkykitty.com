@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const s3About = "https://thequirkykitty.com/content/about.md";
 
-const src = "https://thequirkykitty.com/content/photos/blue_swirl.jpeg";
+// const src = "https://thequirkykitty.com/content/photos/heidi_ziggy_vert.jpg";
 
 export default function About() {
   const {
@@ -23,17 +23,20 @@ export default function About() {
     return <div>Error Loading</div>;
   }
 
+  //<div className="relative w-full h-full md:h-full md:aspect-auto">
+
   return (
     <>
       <div className="flex flex-col md:flex-row gap-5">
         <Card className="tqk-card w-full md:w-1/4 md:shrink-0 order-1 md:order-1">
-          <div className="relative w-full h-48 md:h-full aspect-[4/3] md:aspect-auto">
+          <div className="relative w-60 max-w-[350px] aspect-[3/4] md:w-full mx-auto">
             <Image
-              src={src}
-              alt="Blue swirl"
+              src="/heidi_ziggy_vert.jpg"
+              alt="Heidi and Ziggy"
+              //width={630}
+              //height={1280}
               fill
-              priority
-              className="rounded-lg shadow-xl object-cover"
+              className="rounded-lg shadow-xl object-contain"
             />
           </div>
         </Card>
@@ -50,15 +53,14 @@ export default function About() {
 
       <Card className="tqk-card my-5 w-full">
         <CardContent className="relative flex flex-col md:flex-row justify-center gap-10 sm:gap-4 p-4 md:h-48">
-          <div className="relative w-full md:w-1/5 md:h-[50%] sm:h-16 md:self-center ">
+          <div className="relative w-full md:w-1/5 h-24 md:h-full">
             <Image
-              src="/uw.png"
+              src="/uwaab.png"
               alt="University of Washington"
               fill
               className="object-contain"
             />
           </div>
-          {/* <div className="relative w-full md:w-1/5 h-20 md:h-[90%] md:self-center"> */}
           <div className="relative w-full md:w-1/5 h-24 md:h-full">
             <Image
               src="/pro_pet_hero.png"

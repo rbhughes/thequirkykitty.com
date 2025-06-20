@@ -1,25 +1,7 @@
 "use client";
 
 import Link from "next/link";
-//import ContactOrBook from "./contact-or-book";
 
-// export function Footer() {
-//   return (
-//     // <footer className="tqk-footer-gradient h-20 flex items-center justify-center">
-//     <footer className="tqk-footer-gradient h-16 flex">
-//       <span className="text-black text-sm text-left">
-//         © {new Date().getFullYear()} The Quirky Kitty
-//       </span>
-
-//       <button className="tqk-bigass-button">
-//         <Link href="/contact">New Client? Send Inquiry</Link>
-//       </button>
-//       <button className="tqk-bigass-button">
-//         <Link href="/contact">Existing Client? Book Service</Link>
-//       </button>
-//     </footer>
-//   );
-// }
 export function Footer() {
   return (
     <footer className="bg-white/50 h-auto md:h-18 p-4 md:p-0">
@@ -28,14 +10,14 @@ export function Footer() {
         <div className="hidden md:block"></div>
 
         <div className="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-2 order-1">
-          <button className="tqk-bigass-button">
+          <button className="tqk-bigass-button whitespace-nowrap">
             <Link href="/contact">
               <span className="md:hidden">Send Inquiry</span>
               <span className="hidden md:inline">New Client? Send Inquiry</span>
             </Link>
           </button>
-          <button className="tqk-bigass-button">
-            <Link href="/contact">
+          <button className="tqk-bigass-button whitespace-nowrap">
+            <Link href="https://www.timetopet.com/portal/thequirkykitty">
               <span className="md:hidden">Book Service</span>
               <span className="hidden md:inline">
                 Existing Client? Book Service
